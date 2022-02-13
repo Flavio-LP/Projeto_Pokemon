@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import Home,{pokemons,pokemon} from '../index'
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-export default function ChartSample() {
-  console.log({pokemons});
+
+export default function ChartSample(props) {
+
+  const Pokemons=props.children
+    console.log(Pokemons.name)
+      
 
   const [dataSample, setDataSample] = useState({
     series: [{
@@ -16,13 +19,13 @@ export default function ChartSample() {
       options: {
         chart: {
           type: 'bar',
-          height: 430
+          height: 200
         },
         plotOptions: {
           bar: {
             horizontal: true,
             dataLabels: {
-              position: 'top',
+              position: 'bottom',
             },
           }
         },
@@ -44,13 +47,13 @@ export default function ChartSample() {
           intersect: false
         },
         xaxis: {
-          categories: ['Pikachu'],
+          categories: [],
         },
       },
     
   });
 
-  return (
+   return (
     <div>
       <Chart
         options={dataSample.options}
